@@ -1,4 +1,4 @@
-package resource.estagio.books.infra
+package resource.estagio.books.data
 
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -11,6 +11,6 @@ object RetrofitClient {
              .addConverterFactory(MoshiConverterFactory.create())
              .build()
     }
-    val service = initRetrofit().create(NYTServices::class.java)
+    val service: NYTServices = initRetrofit().create(NYTServices::class.java)
 
 }

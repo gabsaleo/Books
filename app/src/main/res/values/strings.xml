@@ -1,4 +1,13 @@
 <resources>
+
     <string name="app_name">Books</string>
+
+    <!-- Books Activity-->
     <string name="books_title">Books</string>
+
+    <!-- Book Details Activity-->
+    <string name="book_details_title_label">Title</string>
+    <string name="book_details_description_label">Description</string>
+    <string name="book_details_author_label">Author</string>
+
 </resources>

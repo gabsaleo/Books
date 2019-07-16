@@ -1,4 +1,4 @@
-package resource.estagio.books.view
+package resource.estagio.books.view.books
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -8,7 +8,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_books.*
 import resource.estagio.books.R
-import resource.estagio.books.model.Book
+import resource.estagio.books.view.details.BookDetailsActivity
 
 class BooksActivity : AppCompatActivity() {
 
@@ -19,14 +19,17 @@ class BooksActivity : AppCompatActivity() {
         toolbarMain.title = getString(R.string.books_title)
         setSupportActionBar(toolbarMain)
 
-        val viewModel : BooksViewModel = ViewModelProviders.of(this).get(BooksViewModel :: class.java)
+        val viewModel : BooksViewModel = ViewModelProviders.of(this).get(BooksViewModel:: class.java)
         viewModel.booksLiveData.observe(this, Observer {
             it?.let {
                 books ->
                 with(recyclerView) {
                     layoutManager = LinearLayoutManager(this@BooksActivity, RecyclerView.VERTICAL, false)
                     setHasFixedSize(true)
-                    adapter = BooksAdapter(books)
+                    adapter = BooksAdapter(books) { book ->
+                        val intent =BookDetailsActivity.getIntent(this@BooksActivity, book.title, book.description)
+                        this@BooksActivity.startActivity(intent)
+                    }
                 }
             }
         })
